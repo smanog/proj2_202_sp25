@@ -17,7 +17,6 @@ class Row:
     energy_per_capita: float|None
     total_emissions: float|None
     total_per_capita: float|None
-    emissions: float
 
 @dataclass(frozen = True)
 class Node:
@@ -29,11 +28,19 @@ class Node:
 def read_csv_lines(filename: str) -> Optional[Node]:
     with open(filename) as csvfile:
         reader = csv.reader(csvfile)
-        next(reader)
-    return Node(read_csv_lines(filename))
+        parse_row(next(reader))
+    return Node(read_csv_lines(filename),)
+
+def parse_row(fields: list[str]) -> Row:
+    convert = Row(fields[0], int(fields[1]), float(fields[2]), float(fields[3]), float(fields[4]), float(fields[5]), float(fields[6]), float(fields[7]))
+    return convert
 
 def listlen(data: Optional[Node]) -> int:
     pass
+
+def filter_rows(data: Optional[Node],field_name: str,comparison: str,value: Union[str, float, int]) -> Optional[Node]:
+    pass
+
 #for reference for now
 def total_item_count(filename: str) -> int:
     with open(filename, newline="") as csvfile:
