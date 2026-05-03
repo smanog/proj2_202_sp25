@@ -39,13 +39,16 @@ def parse_row(fields: list[str]) -> Row:
 
 #returns the number of Rows there are in a list
 def listlen(data: Optional[Node]) -> int:
-    if data is None:
+    if data.value.country is None:
         return 0
-    if data != None:
-        return len(data)
+    if data.value != None:
+        if data.value.country != None:
+            return 1
 
 #filters the data given certain bounds
 def filter_rows(data: Optional[Node],field_name: str,comparison: str,value: Union[str, float, int]) -> Optional[Node]:
+    if data.value.country == value:
+        return data
     pass
 
 #for reference for now
