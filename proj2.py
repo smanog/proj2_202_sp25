@@ -25,23 +25,26 @@ class Node:
 # ...
 
 # Then your functions.
+#Turns the rows from the file into Row objects and builds a linked list of Nodes using that data
 def read_csv_lines(filename: str) -> Optional[Node]:
     with open(filename) as csvfile:
         reader = csv.reader(csvfile)
         parse_row(next(reader))
     return read_csv_lines(filename)
 
+#converts the data given in the csv file from string into float or int
 def parse_row(fields: list[str]) -> Row:
     convert = Row(fields[0], int(fields[1]), float(fields[2]), float(fields[3]), float(fields[4]), float(fields[5]), float(fields[6]), float(fields[7]))
     return convert
 
+#returns the number of Rows there are in a list
 def listlen(data: Optional[Node]) -> int:
     if data is None:
         return 0
     if data != None:
         return len(data)
 
-
+#filters the data given certain bounds
 def filter_rows(data: Optional[Node],field_name: str,comparison: str,value: Union[str, float, int]) -> Optional[Node]:
     pass
 
