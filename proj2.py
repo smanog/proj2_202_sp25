@@ -36,7 +36,11 @@ def parse_row(fields: list[str]) -> Row:
     return convert
 
 def listlen(data: Optional[Node]) -> int:
-    pass
+    if data is None:
+        return 0
+    if data != None:
+        return len(data)
+
 
 def filter_rows(data: Optional[Node],field_name: str,comparison: str,value: Union[str, float, int]) -> Optional[Node]:
     pass
