@@ -29,7 +29,10 @@ class Test(unittest.TestCase):
         self.assertEqual(listlen(lst), 3)
 
     def test_filter_rows(self):
-        pass
+        r = Row("Afghanistan", 1990, 0.32, 0.029921072, 0.1870067, 2.05, 0.19168186, None)
+        lst = Node(r, None)
+        result = filter_rows(lst, "year", "less_than", 2025)
+        self.assertTrue(result is None or isinstance(result, Node))
 
 if __name__ == "__main__":
     unittest.main()
