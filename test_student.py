@@ -21,7 +21,11 @@ class Test(unittest.TestCase):
         self.assertEqual(row.energy_co2_emissions, None)
 
     def test_listlen(self):
-        pass
+        r1 = Row("Afghanistan", 1990, 0.32, 0.029921072, 0.1870067, 2.05, 0.19168186, None)
+        r2 = Row("Africa", 2002, 0.5, None, None, None, None, None)
+        r3 = Row("Albania", 2024, None, None, None, None, None, None)
+        lst = Node(r1, Node(r2, Node(r3, None)))
+        self.assertEqual(listlen(lst), 3)
 
     def test_filter_rows(self):
         pass
