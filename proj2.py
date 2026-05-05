@@ -30,14 +30,12 @@ def read_csv_lines(filename: str) -> Optional[Node]:
     with open(filename) as csvfile:
         reader = csv.reader(csvfile)
         row = parse_row(next(reader))
-        return Node(row, read_csv_lines(filename))
-    #return read_csv_lines(filename)
+        return Node(row, None)
 
 #converts the data given in the csv file from string into float or int
 def parse_row(fields: list[str], idx: int = 0) -> Row:
     convert = Row(fields[0], int(fields[1]), float(fields[2]), float(fields[3]), float(fields[4]), float(fields[5]), float(fields[6]), float(fields[7]))
     return convert
-
 
 #returns the number of Rows there are in a list
 def listlen(data: Optional[Node], count: int = 0) -> int:
@@ -54,16 +52,3 @@ def filter_rows(data: Optional[Node],field_name: str,comparison: str,value: Unio
         return data
     if comparison == 'greater_than' and data.value.year > value:
         return data
-    pass
-
-#for reference for now
-#def total_item_count(filename: str) -> int:
- #   with open(filename, newline="") as csvfile:
-  #      iter = csv.reader(csvfile)
-   #     topline = next(iter)
-    #    if not (topline == expected_labels):
-     #       raise ValueError("unexpected first line: got: {}".format(topline))
-      #  item_count = 0
-       # for line in iter:
-        #    item_count = item_count + float(line[2])
-        #return item_count

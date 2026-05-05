@@ -10,8 +10,9 @@ from proj2 import (
 )
 
 class Test(unittest.TestCase):
-    def test_csv_lines(self):
-        pass
+    def test_read_csv_lines(self):
+        result = read_csv_lines("another.csv")
+        self.assertTrue(result is None or isinstance(result, Node))
 
     def test_parse_row(self):
         row = parse_row([
