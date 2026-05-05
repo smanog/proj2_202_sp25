@@ -29,24 +29,30 @@ class Node:
 def read_csv_lines(filename: str) -> Optional[Node]:
     with open(filename) as csvfile:
         reader = csv.reader(csvfile)
-        parse_row(next(reader))
-    return read_csv_lines(filename)
+        row = parse_row(next(reader))
+        return Node(row, read_csv_lines(filename))
+    #return read_csv_lines(filename)
 
 #converts the data given in the csv file from string into float or int
-def parse_row(fields: list[str]) -> Row:
+def parse_row(fields: list[str], idx: int = 0) -> Row:
     convert = Row(fields[0], int(fields[1]), float(fields[2]), float(fields[3]), float(fields[4]), float(fields[5]), float(fields[6]), float(fields[7]))
     return convert
+
 
 #returns the number of Rows there are in a list
 def listlen(data: Optional[Node], count: int = 0) -> int:
     if data == None:
         return count
-    if data.next != None:
+    if data.value != None:
         return listlen(data.next, count + 1)
 
 #filters the data given certain bounds
 def filter_rows(data: Optional[Node],field_name: str,comparison: str,value: Union[str, float, int]) -> Optional[Node]:
-    if data.value.country == value:
+    if data.value.country == value and comparison == 'equal' and field_name == 'country':
+        return data
+    if comparison == 'less_than' and data.value.year < value and field_name == 'year':
+        return data
+    if comparison == 'greater_than' and data.value.year > value:
         return data
     pass
 
